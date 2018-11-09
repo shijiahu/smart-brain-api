@@ -1,0 +1,34 @@
+version: '3.6'
+
+services:
+
+  # Backend API
+  smart-brain-api:
+    container_name: backend
+    # image: node:8.12.0
+    build: ./
+    environment:
+      POSTGRES_USER: shijia
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: smart-brain-docker
+      POSTGRES_HOST: postgres
+      # POSTGRES_URI: postgres://shijia:secret@postgres:1234/smart-brain-docker
+    links:
+      - postgres
+    command: npm start
+    working_dir: /usr/src/smart-brain-api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/usr/src/smart-brain-api
+  
+  # Postgres
+  postgres: 
+    environment:
+      POSTGRES_USER: shijia
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: smart-brain-docker
+      POSTGRES_HOST: postgres
+    build: ./postgres
+    ports:
+      - "1234:5432"
