@@ -6,7 +6,7 @@ CREATE TABLE users (
     email text UNIQUE NOT NULL,
     entries BIGINT DEFAULT 0,
     joined TIMESTAMP NOT NULL,
-    age SMALLINT NOT NULL CHECK (age > 0),
+    age SMALLINT,
     pet VARCHAR(100)
 );
 
